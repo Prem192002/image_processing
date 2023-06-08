@@ -1,29 +1,31 @@
 import tensorflow as tf
 
-def marine_life_image_processing(image):
-  # Convert the image to grayscale.
-  grayscale_image = tf.image.rgb_to_grayscale(image)
+# Load and preprocess the image
+def preprocess_image(image_path):
+    image = tf.io.read_file(image_path)
+    image = tf.image.decode_image(image, channels=3)
+    image = tf.image.resize(image, [256, 256])  # Resize to a desired size
+    image = image / 255.0  # Normalize the image
+    return image
 
-  # Apply a Gaussian blur to the image.
-  blurred_image = tf.image.gaussian_blur(grayscale_image, [5, 5])
+# Enhance image visibility and clarity
+def enhance_image(image):
+    image = tf.image.adjust_contrast(image, 1.2)  # Increase contrast
+    image = tf.image.adjust_brightness(image, 0.1)  # Increase brightness
+    image = tf.image.adjust_gamma(image, gamma=1.2)  # Apply gamma correction
+    image = tf.image.median_rgb(image, filter_shape=3)  # Apply median filtering
+    return image
 
-  # Apply a threshold to the image.
-  thresholded_image = tf.image.threshold(blurred_image, 128, 255, tf.image.NEAREST_NEIGHBOR)
+# Load the image
+image_path = r"C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1.jpeg"
+image = preprocess_image(image_path)
 
-  # Convert the image back to RGB.
-  rgb_image = tf.image.rgb_to_grayscale(thresholded_image)
+# Enhance the image
+enhanced_image = enhance_image(image)
 
-  return rgb_image
+# Convert the enhanced image to uint8 format
+enhanced_image = tf.image.convert_image_dtype(enhanced_image, dtype=tf.uint8)
 
-def main():
-  # Load the image.
-  image = tf.io.read_file("C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1")
+# Save the enhanced image
+tf.io.write_file(r"C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\enhanced_image.jpeg", tf.image.encode_jpeg(enhanced_image))
 
-  # Process the image.
-  processed_image = marine_life_image_processing(image)
-
-  # Save the processed image.
-  tf.io.write_file("C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\processed_image.jpeg", processed_image)
-
-if __name__ == "__main__":
-  main()
