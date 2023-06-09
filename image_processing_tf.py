@@ -13,7 +13,7 @@ def enhance_image(image):
     image = tf.image.adjust_contrast(image, 1.2)  # Increase contrast
     image = tf.image.adjust_brightness(image, 0.1)  # Increase brightness
     image = tf.image.adjust_gamma(image, gamma=1.2)  # Apply gamma correction
-    image = tf.image.median_rgb(image, filter_shape=3)  # Apply median filtering
+    image = tf.image.median_filter2D(image, filter_shape=3)  # Apply median filtering
     return image
 
 # Load the image
