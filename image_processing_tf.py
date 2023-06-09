@@ -1,31 +1,31 @@
-import tensorflow as tf
+import cv2
+import numpy as np
 
-# Load and preprocess the image
-def preprocess_image(image_path):
-    image = tf.io.read_file(image_path)
-    image = tf.image.decode_image(image, channels=3)
-    image = tf.image.resize(image, [256, 256])  # Resize to a desired size
-    image = image / 255.0  # Normalize the image
-    return image
+def dehaze_adaptive_histogram_equalization(image):
+  """Dehazes an image using adaptive histogram equalization.
 
-# Enhance image visibility and clarity
-def enhance_image(image):
-    image = tf.image.adjust_contrast(image, 1.2)  # Increase contrast
-    image = tf.image.adjust_brightness(image, 0.1)  # Increase brightness
-    image = tf.image.adjust_gamma(image, gamma=1.2)  # Apply gamma correction
-    image = tf.image.median_filter2D(image, filter_shape=3)  # Apply median filtering
-    return image
+  Args:
+    image: The input image.
 
-# Load the image
-image_path = r"C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1.jpeg"
-image = preprocess_image(image_path)
+  Returns:
+    The dehazed image.
+  """
 
-# Enhance the image
-enhanced_image = enhance_image(image)
+  # Equalize the histogram of each channel of the image.
+  for channel in range(3):
+    image[:, :, channel] = cv2.equalizeHist(image[:, :, channel])
 
-# Convert the enhanced image to uint8 format
-enhanced_image = tf.image.convert_image_dtype(enhanced_image, dtype=tf.uint8)
+  return image
 
-# Save the enhanced image
-tf.io.write_file(r"C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\enhanced_image.jpeg", tf.image.encode_jpeg(enhanced_image))
+def main():
+  # Load the input image.
+  image = cv2.imread(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1.jpeg')
 
+  # Dehaze the image.
+  dehazed_image = dehaze_adaptive_histogram_equalization(image)
+
+  # Save the dehazed image.
+  cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\dehaze_image.jpeg', dehazed_image)
+
+if __name__ == '__main__':
+  main()
