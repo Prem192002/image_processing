@@ -19,13 +19,13 @@ def dehaze_adaptive_histogram_equalization(image):
 
 def main():
   # Load the input image.
-  image = cv2.imread(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw2.jpeg')
+  image = cv2.imread(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw5.jpg')
 
   # Dehaze the image.
   dehazed_image = dehaze_adaptive_histogram_equalization(image)
 
   # Save the dehazed image.
-  cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\dehaze_img.jpeg', dehazed_image)
+  cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\img_5.jpg', dehazed_image)
 
 if __name__ == '__main__':
   main()
