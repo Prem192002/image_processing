@@ -57,7 +57,7 @@ def main():
     dehazed_image = dehaze_adaptive_histogram_equalization(image)
 
     # Save the dehazed image.
-    output_path = r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\img1.jpeg'
+    output_path = r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\pre1.jpeg'
     cv2.imwrite(output_path, dehazed_image)
     print(f"Dehazed image saved at: {output_path}")
 
