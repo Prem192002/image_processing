@@ -37,7 +37,7 @@ def main():
     enhanced_image = underwater_image_enhancement(image)
 
     # Save the enhanced image
-    cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\imag21.jpeg', enhanced_image)
+    cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\dehaze.jpeg', enhanced_image)
 
 if __name__ == '__main__':
     main()
