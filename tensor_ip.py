@@ -14,6 +14,18 @@ def load_image(image_path):
 def enhance_contrast(image, contrast_factor):
     return tf.image.adjust_contrast(image, contrast_factor)
 
+# Enhance water clarity by lightening
+def lighten_water(image, water_mask, brightness_factor):
+    # Convert the mask to a float tensor
+    water_mask = tf.cast(water_mask, dtype=tf.float32)
+    
+    # Adjust the brightness of the water regions
+    water = image + tf.expand_dims(brightness_factor * water_mask, axis=-1)
+    
+    # Combine the water and non-water regions
+    enhanced_image = water + (1 - water_mask) * image
+    return enhanced_image
+
 # Apply color adjustment
 def adjust_color(image, brightness, saturation, hue):
     image = tf.image.adjust_brightness(image, brightness)
@@ -44,7 +56,7 @@ image_path = r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1.jpeg'
 height = 480
 width = 640
 contrast_factor = 2.0
-brightness = 0.2
+brightness_factor = 0.2  # Adjust this value to control the lightening effect on water
 saturation = 1.5
 hue = 0.1
 sigma = 1.0
@@ -53,11 +65,17 @@ strength = 0.5
 # Load and preprocess the image
 image = load_image(image_path)
 
+# Generate a mask for water regions (assuming water is represented by blue color)
+water_mask = tf.less(image[..., 2], 0.5)
+
 # Apply contrast enhancement
 enhanced_image = enhance_contrast(image, contrast_factor)
 
+# Enhance water clarity by lightening
+enhanced_image = lighten_water(enhanced_image, water_mask, brightness_factor)
+
 # Apply color adjustment
-color_adjusted_image = adjust_color(enhanced_image, brightness, saturation, hue)
+color_adjusted_image = adjust_color(enhanced_image, brightness=0.0, saturation=saturation, hue=hue)
 
 # Apply image sharpening
 sharpened_image = sharpen_image(color_adjusted_image, sigma, strength)
