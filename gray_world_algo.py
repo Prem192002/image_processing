@@ -31,13 +31,13 @@ def underwater_image_enhancement(image):
 
 def main():
     # Load the input image
-    image = cv2.imread(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\uw1.jpeg')
+    image = cv2.imread(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\input\image3.jpg')
 
     # Enhance the underwater image
     enhanced_image = underwater_image_enhancement(image)
 
     # Save the enhanced image
-    cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\dehaze.jpeg', enhanced_image)
+    cv2.imwrite(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\output\out3.jpg', enhanced_image)
 
 if __name__ == '__main__':
     main()
