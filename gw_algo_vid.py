@@ -75,7 +75,7 @@ def underwater_image_enhancement(image):
 
 def main():
     # Path to the input underwater video
-    video_path = r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\InShot_20230604_204945432.mp4'
+    video_path = r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\new_vid.mp4'
 
     # Enhance the underwater video
     underwater_video_enhancement(video_path)

@@ -19,7 +19,7 @@ def dehaze_adaptive_histogram_equalization(image):
 
 def main():
     # Open the video capture
-    cap = cv2.VideoCapture(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\rays_-_16165 (540p).mp4')
+    cap = cv2.VideoCapture(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\new_vid.m4v.mp4')
 
     # Get video properties
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -28,7 +28,7 @@ def main():
 
     # Create video writer to save the dehazed video
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\output_video2.mp4', fourcc, fps, (width, height))
+    out = cv2.VideoWriter(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\output_video3.mp4', fourcc, fps, (width, height))
 
     while True:
         # Read a frame from the video
