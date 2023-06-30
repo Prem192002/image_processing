@@ -19,7 +19,7 @@ def dehaze_adaptive_histogram_equalization(image):
 
 def main():
     # Open the video capture
-    cap = cv2.VideoCapture(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\new_vid.m4v.mp4')
+    cap = cv2.VideoCapture(r'C:\Users\Prem\OneDrive\Desktop\Coratia_Tech\videos\new_vid.mp4')
 
     # Get video properties
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
