@@ -45,7 +45,7 @@ def underwater_video_enhancement(video_path):
 
     print('Video processing completed.')
 
-def underwater_image_enhancement(image):
+def underwater_image_enhancement(image, gamam=0.5):
     """Enhances an underwater image to remove water and restore original colors.
 
     Args:
